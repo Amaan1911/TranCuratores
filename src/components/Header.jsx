@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectCartCount } from '../store/cartSlice'
+import { useAuth } from '../context/AuthContext'
 
 export default function Header() {
   const navigate = useNavigate()
   const count = useSelector(selectCartCount)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { user, logout } = useAuth()
 
-  const user = JSON.parse(localStorage.getItem('user') || 'null')
-
-  function logout() {
-    localStorage.removeItem('user')
+  function handleLogout() {
+    logout()
     navigate('/login')
   }
 
@@ -42,7 +42,7 @@ export default function Header() {
                 <span className="text-gray-700">Hi, {user.name}</span>
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
-                  onClick={logout}
+                  onClick={handleLogout}
                 >
                   Logout
                 </button>
@@ -91,7 +91,7 @@ export default function Header() {
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors w-full"
                   onClick={() => {
-                    logout()
+                    handleLogout()
                     setMenuOpen(false)
                   }}
                 >

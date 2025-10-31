@@ -1,8 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 export default function Login() {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [msg, setMsg] = React.useState('')
@@ -15,9 +17,8 @@ export default function Login() {
       setMsg('Invalid credentials')
       return
     }
-    localStorage.setItem('user', JSON.stringify({ name: user.name, email }))
+    login({ name: user.name, email })
     navigate('/')
-    window.dispatchEvent(new Event('storage'))
   }
 
   return (
