@@ -24,7 +24,7 @@ export default function Header() {
             to="/"
             className="text-xl sm:text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
           >
-            🛍️ Trans Curatorsrm 
+            🛍️ Trans Curators
           </Link>
 
           {/* Desktop Nav */}
